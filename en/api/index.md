@@ -9,6 +9,8 @@ description: You may want to fetch data and render it on the server-side. Nuxt.j
 
 - **Type:** `Function`
 
+<p class="Alert Alert--nuxt-green"><b>Info:</b> Please visit the [async data guide](/guide/async-data) as well!</p>
+
 `asyncData` is called every time before loading the component (**only for page components**). It can be called from the server-side or before navigating to the corresponding route. This method receives the [`context`](/api/context) object as the first argument, you can use it to fetch some data and return the component data.
 
 The result from asyncData will be **merged** with data.
@@ -24,4 +26,4 @@ export default {
 }
 ```
 
-<div class="Alert Alert--orange">You do **NOT** have access of the component instance through `this` inside `asyncData` because it is called **before initiating** the component.</div>
+<p class="Alert Alert--orange"><b>Warning:</b> You **don't** have access of the component instance through `this` inside `asyncData` because it is called **before initiating** the component.</p>
