@@ -53,7 +53,7 @@ router: {
 
 ## Dynamic Routes
 
-To define a dynamic route with a param, you need to define a .vue file OR a directory **prefixed by an underscore**.
+To define a dynamic route with a parameter, you need to define a .vue file OR a directory **prefixed by an underscore**.
 
 This file tree:
 
@@ -96,7 +96,7 @@ router: {
 }
 ```
 
-As you can see the route named `users-id` has the path `:id?` which makes it optional, if you want to make it required, create an `index.vue` file in the `users/_id` directory.
+As you can see the route named `users-id` has the path `:id?` which makes it optional, if you want to make it required, create an `index.vue` file in the `users/_id` directory instead.
 
 <p class="Alert Alert--orange"><b>Warning:</b> dynamic routes are ignored by the `generate` command: [API Configuration generate](/api/configuration-generate#routes)</p>
 
@@ -115,7 +115,7 @@ export default {
 }
 ```
 
-If the validate method does not return `true` or a `Promise` that resolve to `true` or throws an Error, Nuxt.js will automatically load the 404 error page or 500 error page in case of an error.
+If the validate method does not return `true` or a `Promise` that resolve to `true`, or throws an Error, Nuxt.js will automatically load the 404 error page or 500 error page in case of an error.
 
 More information about the validate method: [API Pages validate](/api/pages-validate)
 
@@ -125,7 +125,7 @@ Nuxt.js lets you create nested route by using the children routes of vue-router.
 
 To define the parent component of a nested route, you need to create a Vue file with the **same name as the directory** which contain your children views.
 
-<p class="Alert Alert--orange"><b>Warning:</b> don't forget to write `<nuxt-child/>` inside the parent component (<code>.vue</code> file).</p>
+<p class="Alert Alert--orange"><b>Warning:</b> don't forget to include `<nuxt-child/>` inside the parent component (<code>.vue</code> file).</p>
 
 This file tree:
 
@@ -230,7 +230,7 @@ We enable this in our `nuxt.config.js` file:
 ``` js
 export default {
   generate: {
-    fallback: true, // if you want to use '404.html'
+    fallback: true, // if you want to use '404.html' instead of the default '200.html'
     fallback: 'my-fallback/file.html' // if your hosting needs a custom location
   }
 }
@@ -246,7 +246,7 @@ GitHub Pages and Netlify recognize the `404.html` file automatically, so setting
 
 #### Implementation for Firebase Hosting
 
-To use on Firebase Hosting, configure `generate.fallback` to `true` and use the following config ([more info](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites)):
+To use the fallback on Firebase Hosting, configure `generate.fallback` to `true` and use the following config ([more info](https://firebase.google.com/docs/hosting/url-redirects-rewrites#section-rewrites)):
 
 ``` json
 {
@@ -273,7 +273,7 @@ Nuxt.js uses the [`<transition>`](http://vuejs.org/v2/guide/transitions.html#Tra
 
 ### Global Settings
 
-<p class="Alert Alert--nuxt-green"><b>Info :</b> Nuxt.js default transition name is `"page"`.</p>
+<p class="Alert Alert--nuxt-green"><b>Info:</b> Nuxt.js default transition name is `"page"`.</p>
 
 To add a fade transition to every page of your application, we need a CSS file that is shared across all our routes, so we start by creating a file in the `assets` folder.
 
@@ -288,12 +288,12 @@ Our global css in `assets/main.css`:
 }
 ```
 
-We add its path in our `nuxt.config.js` file:
+Then we add its path to the `css` array in our `nuxt.config.js` file:
 
 ```js
 export default {
   css: [
-    'assets/main.css'
+    '~/assets/main.css'
   ]
 }
 ```
@@ -302,7 +302,7 @@ More information about the transition key: [API Configuration transition](/api/p
 
 ### Page Settings
 
-You can also define a custom transition for only one page with the `transition` property.
+You can also define a custom transition for a specific page with the `transition` property.
 
 We add a new class in our global css in `assets/main.css`:
 
@@ -315,7 +315,7 @@ We add a new class in our global css in `assets/main.css`:
 }
 ```
 
-then, we use the transition property to define the class name to use for this page transition:
+Then we use the transition property to define the class name to use for this page transition:
 
 ```js
 export default {
@@ -359,7 +359,7 @@ export default function ({ route }) {
 }
 ```
 
-Then, in your `nuxt.config.js`, layout or page, use the `middleware` key:
+Then, in your `nuxt.config.js`, use the `router.middleware` key:
 
 `nuxt.config.js`
 
@@ -371,6 +371,17 @@ export default {
 }
 ```
 
-The `stats` middleware will be called for every route changes.
+Now the `stats` middleware will be called for every route changes.
+
+You can add your middleware to a specific layout or page as well:
+
+
+`pages/index.vue` or `layouts/default.vue`
+
+```js
+export default {
+  middleware: 'stats'
+}
+```
 
 To see a real-life example using the middleware, please see [example-auth0](https://github.com/nuxt/example-auth0) on GitHub.
