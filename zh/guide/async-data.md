@@ -78,7 +78,7 @@ export default {
 
 ## 上下文对象
 
-可通过 [API `context`](/api/context) 来了解该对象的所有属性和方法。
+可通过 [API `context`](/api/) 来了解该对象的所有属性和方法。
 
 ### 访问动态路由数据
 
